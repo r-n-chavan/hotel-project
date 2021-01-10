@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel Booking</title>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <!------ Include the above in your HEAD tag ---------->
+
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+
+<style>
+.search-sec{
+    background: #1A4668;padding: 2rem;
+}
+.search-slt{
+    display: block;
+    width: 100%;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #55595c;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    height: calc(3rem + 2px) !important;
+    border-radius:0;
+}
+.wrn-btn{
+    width: 100%;
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: capitalize;
+     height: calc(3rem + 2px) !important;
+     border-radius:0;
+}
+
+.col-md-8 {
+    -ms-flex: 0 0 33.333333%;
+    flex: 24 0 33.333333%;
+    max-width: 100.333333%;
+}
+.col-md-3 {
+    -ms-flex: 0 0 33.333333%;
+    flex: 10 10 33.333333%;
+    max-width: 100.333333%;
+}
+
+</style>
+</head>
+<body>
+  <a href="">Home</a>
+  <a href="">News</a>
+  <a href="/customer/edit/{{user}}">Edit</a>
+  <a href="">Contact</a>
+  <a href="">About</a>
+
+<p style="text-align:right">
+    {% if user %}
+    <font  size="5" >{{user.title()}}</font> &nbsp; &nbsp;
+    <a href="/logout">Logout</a>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+    {% else %}
+
+    <a href="/registration/"><button type="button" class="btn btn-outline-primary">Register</button></a>
+     &nbsp;
+    <a href="/login/"><button type="button" class="btn btn-outline-success">Log in</button></a>
+    &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+    {% endif %}
+
+</p>
+
+  <section class="search-sec">
+    <div class="container">
+        <form action="#" method="post" novalidate="novalidate">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <input type="text" class="form-control form-control-lg" placeholder="Enter Hotel Name">
+                        </div>
+                    <div class="col-lg-3 col-md-4 col-sm-12 p-0">
+                            <button type="button" class="btn btn-danger wrn-btn">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+
+<section class="py-5 bg-white">
+    {% for hotel in hotellist %}
+    <div class="container">
+	<div class="row mb-3">
+	    <div class="col-md-8">
+	        <div class="card shadow">
+	            <div class="card-body">
+	                <div class="row text-center ">
+                	    <div class="col-md-1 mr-2">
+                	        <i class='fas fa-bed' style='font-size:24px'></i>
+                	    </div>
+
+                	    <div class="col-md-6">
+                	        <h4>{{hotel.name}}</h4>
+                	        {{hotel.address}}<br>
+                                {{hotel.contact}}<br> &nbsp;<a href="#" >{{hotel.website}}</a>
+                	    </div>
+                	    <div class="col-md-4">
+                	        <h3>{{hotel.roomref[0].charge}}/-</h3>
+                	        <small>Avg. price/night*</small>
+                	        <div class="sub-row">
+                	          <br><a href="/booked/{{user}}"> <button type="button" class="btn btn-primary btn-sm btn-block" > Check availability</button></a>
+                	        </div>
+                	    </div>
+                	</div>
+	            </div>
+	        </div>
+
+
+	    </div>
+	</div>
+    </div>
+    {% endfor %}
+</section>
+
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Load Bootstrap -->
+        <link rel="stylesheet"
+              href=
+"https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+              integrity=
+"sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
+              crossorigin="anonymous" />
+        <script src=
+"https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                integrity=
+"sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+                crossorigin="anonymous"></script>
+        <script src=
+"https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+                integrity=
+"sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+                crossorigin="anonymous">
+      </script>
+      <style>.btn-group, .btn-group-vertical {
+    position: fixed;
+    display: inline-flex;
+    vertical-align: baseline;
+}</style>
+    </head>
+<body style="text-align:right">
+
+        <div class="container mt-2"
+             style="width: 1500px;">
+
+            <div class="btn-group">
+                <button type="button"
+                        class="btn btn-outline-dark">
+                  {{user}}
+                </button>
+                <button type="button"
+                        class="btn btn-outline-dark
+                               dropdown-toggle
+                               dropdown-toggle-split"
+                        data-toggle="dropdown">
+              </button>
+
+                <div class="dropdown-menu">
+                    <a class="dropdown-item"
+                       href="#">Edit-Profile</a>
+                    <a class="dropdown-item"
+                       href="#">Logout</a>
+                </div>
+            </div>
+        </div>
+
+
+    </body>
+</html>

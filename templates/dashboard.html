@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Dashboard</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<center><h1 class="font-weight-bold">Welcome {{user.title()}}</h1></center><p style="text-align:right" ><a href="/logout"><button type="button" class="btn btn-outline-danger">Logout</button> </a></p>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    {% if resp in ['addhotel','deletehotel'] %}
+    <li class="nav-item">
+    <a class="nav-link active" id="hotel1-tab" data-toggle="tab" href="#hotel1" role="tab" aria-controls="hotel1" aria-selected="true">Hotel</a>
+  </li>
+    {% elif resp == 'edithotel' %}
+    <li class="nav-item">
+    <a class="nav-link active" id="hotel2-tab" data-toggle="tab" href="#hotel2" role="tab" aria-controls="hotel2" aria-selected="true">Hotel</a>
+  </li>
+    {% else %}
+    <li class="nav-item">
+    <a class="nav-link" id="hotel3-tab" data-toggle="tab" href="#hotel3" role="tab" aria-controls="hotel3" aria-selected="false">Hotel</a>
+  </li>
+    {% endif %}
+
+
+    {% if resp in ['addroom','deleteroom'] %}
+    <li class="nav-item">
+    <a class="nav-link active" id="room1-tab" data-toggle="tab" href="#room1" role="tab" aria-controls="room1" aria-selected="true">Room</a>
+  </li>
+    {% elif resp == 'editroom' %}
+    <li class="nav-item">
+    <a class="nav-link active" id="room2-tab" data-toggle="tab" href="#room2" role="tab" aria-controls="room2" aria-selected="true">Room</a>
+  </li>
+    {% else %}
+    <li class="nav-item">
+    <a class="nav-link" id="room3-tab" data-toggle="tab" href="#room3" role="tab" aria-controls="room3" aria-selected="false">Room</a>
+  </li>
+    {% endif %}
+
+
+    {% if resp in ['addmenu','deletemenu'] %}
+    <li class="nav-item">
+    <a class="nav-link active" id="menu1-tab" data-toggle="tab" href="#menu1" role="tab" aria-controls="menu1" aria-selected="true">Menu</a>
+</li>
+    {% elif resp == 'editmenu' %}
+    <li class="nav-item">
+    <a class="nav-link active" id="menu2-tab" data-toggle="tab" href="#menu2" role="tab" aria-controls="menu2" aria-selected="true">Menu</a>
+</li>
+    {% else %}
+    <li class="nav-item">
+    <a class="nav-link" id="menu3-tab" data-toggle="tab" href="#menu3" role="tab" aria-controls="menu3" aria-selected="false">Menu</a>
+</li>
+    {% endif %}
+
+        {% if resp in ['addacc','deleteacc'] %}
+
+    <li class="nav-item">
+        <a class="nav-link active" id="account1-tab" data-toggle="tab" href="#account1" role="tab" aria-controls="account1" aria-selected="true">Account</a>
+        </li>
+    {% elif resp == 'editacc' %}
+    <li class="nav-item">
+         <a class="nav-link active " id="account2-tab" data-toggle="tab" href="#account2" role="tab" aria-controls="account2" aria-selected="true">Account</a>
+        </li>
+    {% else %}
+    <li class="nav-item">
+        <a class="nav-link " id="account3-tab" data-toggle="tab" href="#account3" role="tab" aria-controls="account3" aria-selected="false">Account</a>
+        </li>
+    {% endif %}
+
+</ul>
+<div class="tab-content" id="myTabContent">
+
+
+
+    {% if resp in ['addhotel','deletehotel'] %}
+    <div class="tab-pane fade in active" id="hotel1" role="tabpanel" aria-labelledby="hotel1-tab">
+<br><br>
+
+      <div class="text-center"> <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Add Hotel</button></div>
+  <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <font color="red" >{{msg}}</font>
+      </div>
+            </div>
+         <br>
+        <div id="demo" class="collapse">
+
+<br><br>
+        <form class="form-horizontal" action="/hotel/" method="post">
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="hotelid">Hotel Id &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="hotelid" placeholder="Enter hotel id" name="hotelid" value="{{hotel.id}}">
+      </div>
+            </div>
+         <br>
+
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="hotelname">Hotel Name &nbsp; &nbsp; : </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="hotelname" placeholder="Enter hotel name" name="hotelname" value="{{hotel.name}}">
+      </div>
+            </div>
+         <br>
+
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="hoteladr">Hotel Address : </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="hoteladr" placeholder="Enter hotel address" name="hoteladr" value="{{hotel.address}}">
+      </div>
+            </div>
+         <br>
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="hotelcont">Hotel Contact &nbsp;: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="hotelcont" placeholder="Enter hotel contact" name="hotelcont" value="{{hotel.contact}}">
+      </div>
+            </div>
+         <br>
+
+        <div class="form-group">
+      <label class="control-label col-sm-2" for="hotelwebsite">Hotel Website &nbsp;: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="hotelwebsite" placeholder="Enter hotel website" name="hotelwebsite" value="{{hotel.website}}">
+      </div>
+            </div>
+         <br>
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="hotelaccno">Hotel Acc No &nbsp; :</label>
+      <div class="col-sm-4">
+        <select id="hotelaccno" class="form-control" name="hotelaccno">
+                    <option value="0">-------select-------</option>
+
+        {% if hotel.haccref %} <option value="{{hotel.haccref.id}}" selected>{{hotel.haccref.id}}-{{hotel.haccref.type}}</option>
+        {% else %}{% for acc in acclist %}<option value="{{acc.id}}">{{acc.id}}-{{acc.type}}</option>{% endfor %} {% endif %}
+        </select>
+      </div>
+            </div>
+         <br>
+
+
+            <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+    </form>
+  </div>
+        <br><br>
+<div class="bs-example">
+    <table class="table">
+        <thead class="thead-dark">
+                <th>Hotel Id</th> <th>Hotel Name</th> <th>Hotel Address</th> <th>Hotel Contact</th> <th>Hotel Website</th> <th>Hotel Acc No</th> <th>Number Of Room</th> <th>Action</th>
+            </thead>
+            <tbody>
+                {% for hotel in hotellist %}
+                    <tr>
+                        <td><br><br>{{hotel.id}}</td>
+                        <td><br><br>{{hotel.name}}</td>
+                        <td><br><br>{{hotel.address}}</td>
+                        <td><br><br>{{hotel.contact}}</td>
+                        <td><br><br>{{hotel.website}}</td>
+                        <td><br><br>{{hotel.accno}}</td>
+                        <td><br>{% for room in hotel.roomref%} {{room.type}}-{{room.qty}}<br> {% endfor %}<br></td>
+                        <td>
+                           <br><br> <a href="/hotel/edit/{{hotel.id}}"><button type="button" class="btn btn-outline-success">EDIT</button></a>
+                            <a href="/hotel/delete/{{hotel.id}}"><button type="button" class="btn btn-outline-danger">DELETE</button></a>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+
+    </table>
+</div>
+
+    </div>
+    {% elif resp == 'edithotel' %}
+    <div class="tab-pane fade in active" id="hotel2" role="tabpanel" aria-labelledby="hotel2-tab">
+<br><br>
+
+      <div class="text-center"> <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo7">Add Hotel</button></div>
+  <div id="demo7" class="collapse in">
+
+<br><br>
+        <form class="form-horizontal" action="/hotel/" method="post">
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="hotelid">Hotel Id &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control"  placeholder="Enter hotel id" name="hotelid" value="{{hotel.id}}">
+      </div>
+            </div>
+         <br>
+
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="hotelname">Hotel Name &nbsp; &nbsp; : </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control"  placeholder="Enter hotel name" name="hotelname" value="{{hotel.name}}">
+      </div>
+            </div>
+         <br>
+
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="hoteladr">Hotel Address : </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control"  placeholder="Enter hotel address" name="hoteladr" value="{{hotel.address}}">
+      </div>
+            </div>
+         <br>
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="hotelcont">Hotel Contact &nbsp;: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control"  placeholder="Enter hotel contact" name="hotelcont" value="{{hotel.contact}}">
+      </div>
+            </div>
+         <br>
+
+        <div class="form-group">
+      <label class="control-label col-sm-2" for="hotelwebsite">Hotel Website &nbsp;: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control"  placeholder="Enter hotel website" name="hotelwebsite" value="{{hotel.website}}">
+      </div>
+            </div>
+         <br>
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="hotelaccno">Hotel Acc No &nbsp; :</label>
+      <div class="col-sm-4">
+        <select  class="form-control" name="hotelaccno">
+                    <option value="0">-------select-------</option>
+
+        {% if hotel.haccref %} <option value="{{hotel.haccref.id}}" selected>{{hotel.haccref.id}}-{{hotel.haccref.type}}</option>
+        {% else %}{% for acc in acclist %}<option value="{{acc.id}}">{{acc.id}}-{{acc.type}}</option>{% endfor %} {% endif %}
+        </select>
+      </div>
+            </div>
+         <br>
+
+
+            <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+    </form>
+  </div>
+        <br><br>
+<div class="bs-example">
+    <table class="table">
+        <thead class="thead-dark">
+                <th>Hotel Id</th> <th>Hotel Name</th> <th>Hotel Address</th> <th>Hotel Contact</th> <th>Hotel Website</th> <th>Hotel Acc No</th> <th>Number Of Room</th> <th>Action</th>
+            </thead>
+            <tbody>
+                {% for hotel in hotellist %}
+                    <tr>
+                        <td><br><br>{{hotel.id}}</td>
+                        <td><br><br>{{hotel.name}}</td>
+                        <td><br><br>{{hotel.address}}</td>
+                        <td><br><br>{{hotel.contact}}</td>
+                        <td><br><br>{{hotel.website}}</td>
+                        <td><br><br>{{hotel.accno}}</td>
+                        <td><br>{% for room in hotel.roomref%} {{room.type}}-{{room.qty}}<br> {% endfor %}<br></td>
+                        <td>
+                           <br><br> <a href="/hotel/edit/{{hotel.id}}"><button type="button" class="btn btn-outline-success">EDIT</button></a>
+                            <a href="/hotel/delete/{{hotel.id}}"><button type="button" class="btn btn-outline-danger">DELETE</button></a>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+
+    </table>
+</div>
+
+    </div>
+    {% else %}
+    <div class="tab-pane fade" id="hotel3" role="tabpanel" aria-labelledby="hotel3-tab">
+<br><br>
+
+      <div class="text-center"> <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo6">Add Hotel</button></div>
+  <div id="demo6" class="collapse">
+
+<br><br>
+        <form class="form-horizontal" action="/hotel/" method="post">
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="hotelid">Hotel Id &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control"  placeholder="Enter hotel id" name="hotelid" value="{{hotel.id}}">
+      </div>
+            </div>
+         <br>
+
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="hotelname">Hotel Name &nbsp; &nbsp; : </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control"  placeholder="Enter hotel name" name="hotelname" value="{{hotel.name}}">
+      </div>
+            </div>
+         <br>
+
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="hoteladr">Hotel Address : </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control"  placeholder="Enter hotel address" name="hoteladr" value="{{hotel.address}}">
+      </div>
+            </div>
+         <br>
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="hotelcont">Hotel Contact &nbsp;: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control"  placeholder="Enter hotel contact" name="hotelcont" value="{{hotel.contact}}">
+      </div>
+            </div>
+         <br>
+
+        <div class="form-group">
+      <label class="control-label col-sm-2" for="hotelwebsite">Hotel Website &nbsp;: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control"  placeholder="Enter hotel website" name="hotelwebsite" value="{{hotel.website}}">
+      </div>
+            </div>
+         <br>
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="hotelaccno">Hotel Acc No &nbsp; :</label>
+      <div class="col-sm-4">
+        <select  class="form-control" name="hotelaccno">
+                    <option value="0">-------select-------</option>
+
+        {% if hotel.haccref %} <option value="{{hotel.haccref.id}}" selected>{{hotel.haccref.id}}-{{hotel.haccref.type}}</option>
+        {% else %}{% for acc in acclist %}<option value="{{acc.id}}">{{acc.id}}-{{acc.type}}</option>{% endfor %} {% endif %}
+        </select>
+      </div>
+            </div>
+         <br>
+
+
+            <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+    </form>
+  </div>
+        <br><br>
+<div class="bs-example">
+    <table class="table">
+        <thead class="thead-dark">
+                <th>Hotel Id</th> <th>Hotel Name</th> <th>Hotel Address</th> <th>Hotel Contact</th> <th>Hotel Website</th> <th>Hotel Acc No</th> <th>Number Of Room</th> <th>Action</th>
+            </thead>
+            <tbody>
+                {% for hotel in hotellist %}
+                    <tr>
+                        <td><br><br>{{hotel.id}}</td>
+                        <td><br><br>{{hotel.name}}</td>
+                        <td><br><br>{{hotel.address}}</td>
+                        <td><br><br>{{hotel.contact}}</td>
+                        <td><br><br>{{hotel.website}}</td>
+                        <td><br><br>{{hotel.accno}}</td>
+                        <td><br>{% for room in hotel.roomref%} {{room.type}}-{{room.qty}}<br> {% endfor %}<br></td>
+                        <td>
+                           <br><br> <a href="/hotel/edit/{{hotel.id}}"><button type="button" class="btn btn-outline-success">EDIT</button></a>
+                            <a href="/hotel/delete/{{hotel.id}}"><button type="button" class="btn btn-outline-danger">DELETE</button></a>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+
+    </table>
+</div>
+
+    </div>
+    {% endif %}
+
+
+
+
+
+
+
+    {% if resp in ['addroom','deleteroom'] %}
+    <div class="tab-pane fade in active" id="room1" role="tabpanel" aria-labelledby="room1-tab">
+
+<br><br>
+
+      <div class="text-center"> <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo1">Add Room</button></div>
+  <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <font color="red" >{{msg}}</font>
+      </div>
+            </div>
+         <br>
+        <div id="demo1" class="collapse">
+
+
+        <form class="form-horizontal" action="/room/" method="post">
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="rid">Room Id &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="rid" placeholder="Enter room id" name="rid" value="{{room.id}}">
+      </div>
+            </div>
+         <br>
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="rtype">Room Type &nbsp; &nbsp; &nbsp; :</label>
+      <div class="col-sm-4">
+        <select id="rtype" class="form-control" name="rtype">
+                    <option value="0">-------select-------</option>
+
+        {%if room.type == 'NORMAL' %}  <option value="NORMAL" selected>NORMAL</option> {% else %} <option value="NORMAL" >NORMAL</option>  {% endif %}
+                {%if room.type == 'PREMIUM' %}  <option value="PREMIUM" selected>PREMIUM</option> {% else %} <option value="PREMIUM" >PREMIUM</option>  {% endif %}
+                {%if room.type == 'STANDARD' %}  <option value="STANDARD" selected>STANDARD</option> {% else %} <option value="STANDARD" >STANDARD</option> {% endif %}
+                {%if room.type == 'DELUX' %}  <option value="DELUX" selected>DELUX</option> {% else %} <option value="DELUX" >DELUX</option>  {% endif %}
+        </select>
+      </div>
+            </div>
+         <br>
+
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="rcharge">Room Charge&nbsp;&nbsp;: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="rcharge" placeholder="Enter room charge" name="rcharge" value="{{room.charge}}">
+      </div>
+            </div>
+         <br>
+
+
+             <div class="form-group">
+      <label class="control-label col-sm-2" for="rqty">Room Quantity: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="rqty" placeholder="Enter room quantity" name="rqty" value="{{room.qty}}">
+      </div>
+            </div>
+         <br>
+
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" >Room Status&nbsp; &nbsp;:</label>
+      <div class="col-sm-4">
+                <label class="radio-inline">
+              {%if room.status == 'A' %}  <input type="radio" value="A" name="rstatus" checked > FREE{% else %} <input type="radio" value="A" name="rstatus" > FREE  {% endif %}
+            </label>
+          <label class="radio-inline">
+          {%if room.status == 'NA' %}  <input type="radio" value="NA" name="rstatus" checked > BOOKED{% else %} <input type="radio" value="NA" name="rstatus" > BOOKED  {% endif %}
+          </label>
+      </div>
+            </div>
+         <br>
+
+
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="rhotelid">Hotel Select &nbsp; &nbsp;&nbsp;:</label>
+      <div class="col-sm-4">
+        <select id="rhotelid" multiple class="form-control" name="hotelid">
+                {% for hotel in hotellist %}
+                            <option value="{{hotel.id}}">{{hotel.id}}-{{hotel.name}}</option>
+                            {% endfor %}
+                </select>
+      </div>
+            </div>
+         <br>
+
+         <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+    </form>
+  </div>
+
+
+        <br><br>
+<div class="bs-example">
+    <table class="table">
+        <thead class="thead-dark">
+                <th><a href="/rooms/rid"> Room ID </a></th>
+                <th><a href="/rooms/rtype"> Room Type </a></th>
+                <th><a href="/rooms/rcharge"> Room Charge </a></th>
+                <th><a href="/rooms/rstatus"> Room Status </a></th>
+                <th> Room Quantity</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                {% for room in roomlist %}
+                    <tr>
+                        <td>{{room.id}}</td>
+                        <td>{{room.type}}</td>
+                        <td>{{room.charge}}</td>
+                         <td>{{room.status}}</td>
+                        <td>{{room.qty}}</td>
+                        <td>
+                            <a href="/room/edit/{{room.id}}"><button type="button" class="btn btn-outline-success">EDIT</button></a>
+                            <a href="/room/delete/{{room.id}}"><button type="button" class="btn btn-outline-danger">DELETE</button></a>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+
+    </table>
+    </div>
+
+    </div>
+
+
+    {% elif resp == 'editroom' %}
+    <div class="tab-pane fade in active" id="room2" role="tabpanel" aria-labelledby="room2-tab">
+
+<br><br>
+
+      <div class="text-center"> <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo9">Add Room</button></div>
+  <div id="demo9" class="collapse in">
+<br>
+
+        <form class="form-horizontal" action="/room/" method="post">
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="rid">Room Id &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control"  placeholder="Enter room id" name="rid" value="{{room.id}}">
+      </div>
+            </div>
+         <br>
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="rtype">Room Type &nbsp; &nbsp; &nbsp; :</label>
+      <div class="col-sm-4">
+        <select  class="form-control" name="rtype">
+                    <option value="0">-------select-------</option>
+
+        {%if room.type == 'NORMAL' %}  <option value="NORMAL" selected>NORMAL</option> {% else %} <option value="NORMAL" >NORMAL</option>  {% endif %}
+                {%if room.type == 'PREMIUM' %}  <option value="PREMIUM" selected>PREMIUM</option> {% else %} <option value="PREMIUM" >PREMIUM</option>  {% endif %}
+                {%if room.type == 'STANDARD' %}  <option value="STANDARD" selected>STANDARD</option> {% else %} <option value="STANDARD" >STANDARD</option> {% endif %}
+                {%if room.type == 'DELUX' %}  <option value="DELUX" selected>DELUX</option> {% else %} <option value="DELUX" >DELUX</option>  {% endif %}
+        </select>
+      </div>
+            </div>
+         <br>
+
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="rcharge">Room Charge&nbsp;&nbsp;: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control"  placeholder="Enter room charge" name="rcharge" value="{{room.charge}}">
+      </div>
+            </div>
+         <br>
+
+
+             <div class="form-group">
+      <label class="control-label col-sm-2" for="rqty">Room Quantity: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control"  placeholder="Enter room quantity" name="rqty" value="{{room.qty}}">
+      </div>
+            </div>
+         <br>
+
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" >Room Status&nbsp; &nbsp;:</label>
+      <div class="col-sm-4">
+                <label class="radio-inline">
+              {%if room.status == 'A' %}  <input type="radio" value="A" name="rstatus" checked > FREE{% else %} <input type="radio" value="A" name="rstatus" > FREE  {% endif %}
+            </label>
+          <label class="radio-inline">
+          {%if room.status == 'NA' %}  <input type="radio" value="NA" name="rstatus" checked > BOOKED{% else %} <input type="radio" value="NA" name="rstatus" > BOOKED  {% endif %}
+          </label>
+      </div>
+            </div>
+         <br>
+
+
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="rhotelid">Hotel Select &nbsp; &nbsp;&nbsp;:</label>
+      <div class="col-sm-4">
+        <select  multiple class="form-control" name="hotelid">
+                {% for hotel in hotellist %}
+                            <option value="{{hotel.id}}">{{hotel.id}}-{{hotel.name}}</option>
+                            {% endfor %}
+                </select>
+      </div>
+            </div>
+         <br>
+
+         <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+    </form>
+  </div>
+
+
+        <br><br>
+<div class="bs-example">
+    <table class="table">
+        <thead class="thead-dark">
+                <th><a href="/rooms/rid"> Room ID </a></th>
+                <th><a href="/rooms/rtype"> Room Type </a></th>
+                <th><a href="/rooms/rcharge"> Room Charge </a></th>
+                <th><a href="/rooms/rstatus"> Room Status </a></th>
+                <th> Room Quantity</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                {% for room in roomlist %}
+                    <tr>
+                        <td>{{room.id}}</td>
+                        <td>{{room.type}}</td>
+                        <td>{{room.charge}}</td>
+                         <td>{{room.status}}</td>
+                        <td>{{room.qty}}</td>
+                        <td>
+                            <a href="/room/edit/{{room.id}}"><button type="button" class="btn btn-outline-success">EDIT</button></a>
+                            <a href="/room/delete/{{room.id}}"><button type="button" class="btn btn-outline-danger">DELETE</button></a>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+
+    </table>
+    </div>
+
+    </div>
+
+
+    {% else %}
+    <div class="tab-pane fade" id="room3" role="tabpanel" aria-labelledby="room3-tab">
+
+<br><br>
+
+      <div class="text-center"> <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo8">Add Room</button></div>
+  <div id="demo8" class="collapse">
+<br>
+
+        <form class="form-horizontal" action="/room/" method="post">
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="rid">Room Id &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control"  placeholder="Enter room id" name="rid" value="{{room.id}}">
+      </div>
+            </div>
+         <br>
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="rtype">Room Type &nbsp; &nbsp; &nbsp; :</label>
+      <div class="col-sm-4">
+        <select  class="form-control" name="rtype">
+                    <option value="0">-------select-------</option>
+
+        {%if room.type == 'NORMAL' %}  <option value="NORMAL" selected>NORMAL</option> {% else %} <option value="NORMAL" >NORMAL</option>  {% endif %}
+                {%if room.type == 'PREMIUM' %}  <option value="PREMIUM" selected>PREMIUM</option> {% else %} <option value="PREMIUM" >PREMIUM</option>  {% endif %}
+                {%if room.type == 'STANDARD' %}  <option value="STANDARD" selected>STANDARD</option> {% else %} <option value="STANDARD" >STANDARD</option> {% endif %}
+                {%if room.type == 'DELUX' %}  <option value="DELUX" selected>DELUX</option> {% else %} <option value="DELUX" >DELUX</option>  {% endif %}
+        </select>
+      </div>
+            </div>
+         <br>
+
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="rcharge">Room Charge&nbsp;&nbsp;: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control"  placeholder="Enter room charge" name="rcharge" value="{{room.charge}}">
+      </div>
+            </div>
+         <br>
+
+
+             <div class="form-group">
+      <label class="control-label col-sm-2" for="rqty">Room Quantity: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control"  placeholder="Enter room quantity" name="rqty" value="{{room.qty}}">
+      </div>
+            </div>
+         <br>
+
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" >Room Status&nbsp; &nbsp;:</label>
+      <div class="col-sm-4">
+                <label class="radio-inline">
+              {%if room.status == 'A' %}  <input type="radio" value="A" name="rstatus" checked > FREE{% else %} <input type="radio" value="A" name="rstatus" > FREE  {% endif %}
+            </label>
+          <label class="radio-inline">
+          {%if room.status == 'NA' %}  <input type="radio" value="NA" name="rstatus" checked > BOOKED{% else %} <input type="radio" value="NA" name="rstatus" > BOOKED  {% endif %}
+          </label>
+      </div>
+            </div>
+         <br>
+
+
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="rhotelid">Hotel Select &nbsp; &nbsp;&nbsp;:</label>
+      <div class="col-sm-4">
+        <select  multiple class="form-control" name="hotelid">
+                {% for hotel in hotellist %}
+                            <option value="{{hotel.id}}">{{hotel.id}}-{{hotel.name}}</option>
+                            {% endfor %}
+                </select>
+      </div>
+            </div>
+         <br>
+
+         <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+    </form>
+  </div>
+
+
+        <br><br>
+<div class="bs-example">
+    <table class="table">
+        <thead class="thead-dark">
+                <th><a href="/rooms/rid"> Room ID </a></th>
+                <th><a href="/rooms/rtype"> Room Type </a></th>
+                <th><a href="/rooms/rcharge"> Room Charge </a></th>
+                <th><a href="/rooms/rstatus"> Room Status </a></th>
+                <th> Room Quantity</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                {% for room in roomlist %}
+                    <tr>
+                        <td>{{room.id}}</td>
+                        <td>{{room.type}}</td>
+                        <td>{{room.charge}}</td>
+                         <td>{{room.status}}</td>
+                        <td>{{room.qty}}</td>
+                        <td>
+                            <a href="/room/edit/{{room.id}}"><button type="button" class="btn btn-outline-success">EDIT</button></a>
+                            <a href="/room/delete/{{room.id}}"><button type="button" class="btn btn-outline-danger">DELETE</button></a>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+
+    </table>
+    </div>
+
+    </div>
+
+
+    {% endif %}
+
+
+
+
+    {% if resp in ['addmenu','deletemenu'] %}
+
+    <div class="tab-pane fade in active" id="menu1" role="tabpanel" aria-labelledby="menu1-tab">
+
+<br><br>
+
+      <div class="text-center"> <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo2">Add Menu</button></div>
+  <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <font color="red" >{{msg}}</font>
+      </div>
+            </div>
+         <br>
+        <div id="demo2" class="collapse">
+<br><br>
+
+        <form class="form-horizontal" action="/menu/" method="post">
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="menuid">Menu Id &nbsp; &nbsp; &nbsp;&nbsp;: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="menuid" placeholder="Enter menu id" name="menuid" value="{{menu.id}}">
+      </div>
+            </div>
+         <br>
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="menuname">Menu Name : </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control"  placeholder="Enter menu name" name="menuname" value="{{menu.name}}">
+      </div>
+            </div>
+         <br>
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="menuprice">Menu Price &nbsp;: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="menuprice" placeholder="Enter menu price" name="menuprice" value="{{menu.price}}">
+      </div>
+            </div>
+         <br>
+
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="menuhotels">Menu Hotel :</label>
+      <div class="col-sm-4">
+        <select id="menuhotels" multiple class="form-control" name="menuhotels">
+                {% for hotel in hotellist %}
+                            <option value="{{hotel.id}}">{{hotel.id}}-{{hotel.name}}</option>
+                            {% endfor %}
+                </select>
+      </div>
+            </div>
+         <br>
+
+
+            <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+
+    </form>
+  </div>
+
+
+        <br><br>
+<div class="bs-example">
+    <table class="table">
+        <thead class="thead-dark">
+                <th>Menu Id</th> <th>Menu Name</th> <th>Menu Price</th> <th>Menu Hotel Id</th> <th>Action</th>
+            </thead>
+            <tbody>
+                {% for menu in menulist %}
+                    <tr>
+                        <td><br>{{menu.id}}</td>
+                        <td><br>{{menu.name}}</td>
+                        <td><br>{{menu.price}}</td>
+
+                        <td><br>{% for i in menu.href %} {{i.id}}-{{i.name}} <br><br>
+                            {% endfor %}
+                        </td>
+                        <td>
+                           <br> <a href="/menu/edit/{{menu.id}}"><button type="button" class="btn btn-outline-success">EDIT</button></a>
+                            <a href="/menu/delete/{{menu.id}}"><button type="button" class="btn btn-outline-danger">DELETE</button></a>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+
+    </table>
+</div>
+    </div>
+    {% elif resp == 'editmenu' %}
+
+    <div class="tab-pane fade in active" id="menu2" role="tabpanel" aria-labelledby="menu2-tab">
+
+<br><br>
+
+      <div class="text-center"> <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo11">Add Menu</button></div>
+  <div id="demo11" class="collapse in">
+<br><br>
+
+        <form class="form-horizontal" action="/menu/" method="post">
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="menuid">Menu Id &nbsp; &nbsp; &nbsp;&nbsp;: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control"  placeholder="Enter menu id" name="menuid" value="{{menu.id}}">
+      </div>
+            </div>
+         <br>
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="menuname">Menu Name : </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control"  placeholder="Enter menu name" name="menuname" value="{{menu.name}}">
+      </div>
+            </div>
+         <br>
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="menuprice">Menu Price &nbsp;: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control"  placeholder="Enter menu price" name="menuprice" value="{{menu.price}}">
+      </div>
+            </div>
+         <br>
+
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="menuhotels">Menu Hotel :</label>
+      <div class="col-sm-4">
+        <select  multiple class="form-control" name="menuhotels">
+                {% for hotel in hotellist %}
+                            <option value="{{hotel.id}}">{{hotel.id}}-{{hotel.name}}</option>
+                            {% endfor %}
+                </select>
+      </div>
+            </div>
+         <br>
+
+
+            <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+
+    </form>
+  </div>
+
+
+        <br><br>
+<div class="bs-example">
+    <table class="table">
+        <thead class="thead-dark">
+                <th>Menu Id</th> <th>Menu Name</th> <th>Menu Price</th> <th>Menu Hotel Id</th> <th>Action</th>
+            </thead>
+            <tbody>
+                {% for menu in menulist %}
+                    <tr>
+                        <td><br>{{menu.id}}</td>
+                        <td><br>{{menu.name}}</td>
+                        <td><br>{{menu.price}}</td>
+
+                        <td><br>{% for i in menu.href %} {{i.id}}-{{i.name}} <br><br>
+                            {% endfor %}
+                        </td>
+                        <td>
+                           <br> <a href="/menu/edit/{{menu.id}}"><button type="button" class="btn btn-outline-success">EDIT</button></a>
+                            <a href="/menu/delete/{{menu.id}}"><button type="button" class="btn btn-outline-danger">DELETE</button></a>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+
+    </table>
+</div>
+    </div>
+    {% else %}
+
+    <div class="tab-pane fade" id="menu3" role="tabpanel" aria-labelledby="menu3-tab">
+
+<br><br>
+
+      <div class="text-center"> <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo10">Add Menu</button></div>
+  <div id="demo10" class="collapse">
+<br><br>
+
+        <form class="form-horizontal" action="/menu/" method="post">
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="menuid">Menu Id &nbsp; &nbsp; &nbsp;&nbsp;: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control"  placeholder="Enter menu id" name="menuid" value="{{menu.id}}">
+      </div>
+            </div>
+         <br>
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="menuname">Menu Name : </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="menuname" placeholder="Enter menu name" name="menuname" value="{{menu.name}}">
+      </div>
+            </div>
+         <br>
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="menuprice">Menu Price &nbsp;: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control"  placeholder="Enter menu price" name="menuprice" value="{{menu.price}}">
+      </div>
+            </div>
+         <br>
+
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="menuhotels">Menu Hotel :</label>
+      <div class="col-sm-4">
+        <select  multiple class="form-control" name="menuhotels">
+                {% for hotel in hotellist %}
+                            <option value="{{hotel.id}}">{{hotel.id}}-{{hotel.name}}</option>
+                            {% endfor %}
+                </select>
+      </div>
+            </div>
+         <br>
+
+
+            <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+
+    </form>
+  </div>
+
+
+        <br><br>
+<div class="bs-example">
+    <table class="table">
+        <thead class="thead-dark">
+                <th>Menu Id</th> <th>Menu Name</th> <th>Menu Price</th> <th>Menu Hotel Id</th> <th>Action</th>
+            </thead>
+            <tbody>
+                {% for menu in menulist %}
+                    <tr>
+                        <td><br>{{menu.id}}</td>
+                        <td><br>{{menu.name}}</td>
+                        <td><br>{{menu.price}}</td>
+
+                        <td><br>{% for i in menu.href %} {{i.id}}-{{i.name}} <br><br>
+                            {% endfor %}
+                        </td>
+                        <td>
+                           <br> <a href="/menu/edit/{{menu.id}}"><button type="button" class="btn btn-outline-success">EDIT</button></a>
+                            <a href="/menu/delete/{{menu.id}}"><button type="button" class="btn btn-outline-danger">DELETE</button></a>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+
+    </table>
+</div>
+    </div>
+    {% endif %}
+
+
+    {% if resp in ['addacc','deleteacc'] %}
+
+    <div class="tab-pane fade in active" id="account1" role="tabpanel" aria-labelledby="account1-tab">
+
+<br><br>
+
+      <div class="text-center"> <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo3">Add Account</button></div>
+  <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <font color="red" >{{msg}}</font>
+      </div>
+            </div>
+         <br>
+        <div id="demo3" class="collapse ">
+
+<br>
+        <form class="form-horizontal"  action="/account/" method="post">
+       <div class="form-group">
+      <label class="control-label col-sm-2" for="accid">Account Id &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control"  placeholder="Enter account id" name="accid" value="{{account.id}}">
+      </div>
+            </div>
+         <br>
+
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="accty">Account Type &nbsp; &nbsp;&nbsp;&nbsp;:</label>
+      <div class="col-sm-4">
+        <select  class="form-control" name="accty">
+                    <option value="0">--------select--------</option>
+                {%if account.type == 'Saving' %}  <option value="Saving" selected>SAVING</option> {% else %} <option value="Saving" >SAVING</option> {% endif %}
+                {%if account.type == 'Current' %}  <option value="Current" selected>Current</option> {% else %} <option value="Current" >CURRENT</option>  {% endif %}
+                </select>
+      </div>
+            </div>
+         <br>
+
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="accbal">Account Balance :</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control"  placeholder="Enter account balance" name="accbal" value="{{account.balance}}">
+      </div>
+            </div>
+         <br>
+
+
+
+        <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+    </form>
+  </div>
+
+        <br><br>
+<div class="bs-example">
+    <table class="table">
+        <thead class="thead-dark">
+                <th>Account Id</th> <th>Account Type</th> <th>Account Balance</th> <th>Action</th>
+            </thead>
+            <tbody>
+                {% for acc in acclist2 %}
+                    <tr>
+                        <td>{{acc.id}}</td>
+                        <td>{{acc.type}}</td>
+                        <td>{{acc.balance}}</td>
+                        <td>
+                            <a href="/account/edit/{{acc.id}}"><button type="button" class="btn btn-outline-success">EDIT</button></a>
+                            <a href="/account/delete/{{acc.id}}"><button type="button" class="btn btn-outline-danger">DELETE</button></a>
+
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+    </table>
+</div>
+
+
+    </div>
+
+
+    {% elif resp == 'editacc' %}
+
+    <div class="tab-pane fade in active" id="account2" role="tabpanel" aria-labelledby="account2-tab">
+
+<br><br>
+
+      <div class="text-center"> <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo4">Add Account</button></div>
+        <div id="demo4" class="collapse in">
+
+<br>
+
+
+        <form class="form-horizontal"  action="/account/" method="post">
+       <div class="form-group">
+      <label class="control-label col-sm-2" for="accid">Account Id &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="accid" placeholder="Enter account id" name="accid" value="{{account.id}}">
+      </div>
+            </div>
+         <br>
+
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="accty">Account Type &nbsp; &nbsp;&nbsp;&nbsp;:</label>
+      <div class="col-sm-4">
+        <select id="accty" class="form-control" name="accty">
+                    <option value="0">--------select--------</option>
+                {%if account.type == 'Saving' %}  <option value="Saving" selected>SAVING</option> {% else %} <option value="Saving" >SAVING</option> {% endif %}
+                {%if account.type == 'Current' %}  <option value="Current" selected>Current</option> {% else %} <option value="Current" >CURRENT</option>  {% endif %}
+                </select>
+      </div>
+            </div>
+         <br>
+
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="accbal">Account Balance :</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="accbal" placeholder="Enter account balance" name="accbal" value="{{account.balance}}">
+      </div>
+            </div>
+         <br>
+
+
+
+        <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+    </form>
+  </div>
+
+        <br><br>
+<div class="bs-example">
+    <table class="table">
+        <thead class="thead-dark">
+                <th>Account Id</th> <th>Account Type</th> <th>Account Balance</th> <th>Action</th>
+            </thead>
+            <tbody>
+                {% for acc in acclist2 %}
+                    <tr>
+                        <td>{{acc.id}}</td>
+                        <td>{{acc.type}}</td>
+                        <td>{{acc.balance}}</td>
+                        <td>
+                            <a href="/account/edit/{{acc.id}}"><button type="button" class="btn btn-outline-success">EDIT</button></a>
+                            <a href="/account/delete/{{acc.id}}"><button type="button" class="btn btn-outline-danger">DELETE</button></a>
+
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+    </table>
+</div>
+
+
+    </div>
+
+    {% else %}
+
+
+    <div class="tab-pane fade" id="account3" role="tabpanel" aria-labelledby="account3-tab">
+
+<br><br>
+
+      <div class="text-center"> <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo5">Add Account</button></div>
+        <div id="demo5" class="collapse ">
+
+<br>
+        <form class="form-horizontal"  action="/account/" method="post">
+       <div class="form-group">
+      <label class="control-label col-sm-2" for="accid">Account Id &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: </label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control"  placeholder="Enter account id" name="accid" value="{{account.id}}">
+      </div>
+            </div>
+         <br>
+
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="accty">Account Type &nbsp; &nbsp;&nbsp;&nbsp;:</label>
+      <div class="col-sm-4">
+        <select  class="form-control" name="accty">
+                    <option value="0">--------select--------</option>
+                {%if account.type == 'Saving' %}  <option value="Saving" selected>SAVING</option> {% else %} <option value="Saving" >SAVING</option> {% endif %}
+                {%if account.type == 'Current' %}  <option value="Current" selected>Current</option> {% else %} <option value="Current" >CURRENT</option>  {% endif %}
+                </select>
+      </div>
+            </div>
+         <br>
+
+
+            <div class="form-group">
+      <label class="control-label col-sm-2" for="accbal">Account Balance :</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control"  placeholder="Enter account balance" name="accbal" value="{{account.balance}}">
+      </div>
+            </div>
+         <br>
+
+
+
+        <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+    </form>
+  </div>
+
+        <br><br>
+<div class="bs-example">
+    <table class="table">
+        <thead class="thead-dark">
+                <th>Account Id</th> <th>Account Type</th> <th>Account Balance</th> <th>Action</th>
+            </thead>
+            <tbody>
+                {% for acc in acclist2 %}
+                    <tr>
+                        <td>{{acc.id}}</td>
+                        <td>{{acc.type}}</td>
+                        <td>{{acc.balance}}</td>
+                        <td>
+                            <a href="/account/edit/{{acc.id}}"><button type="button" class="btn btn-outline-success">EDIT</button></a>
+                            <a href="/account/delete/{{acc.id}}"><button type="button" class="btn btn-outline-danger">DELETE</button></a>
+
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+    </table>
+</div>
+
+
+    </div>
+
+
+
+
+    {% endif %}
+
+</div>
+</body>
+</html>
