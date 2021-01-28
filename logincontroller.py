@@ -45,6 +45,25 @@ def hotel_booking():
             return render_template('book_hotel.html',user=session['userinfo'],hotellist=Hotel.query.all())
     return render_template('book_hotel.html', user='',hotellist=Hotel.query.all(),cust='')
 
+@app.route('/hotel_booking/',methods=['POST'])
+def search_hotel():
+    listsearch =[i for i in Hotel.query.all() if f"{request.form.get('hotel')}".lower() in i.name.lower()]
+    if 'userinfo' in session:
+        if session['userinfo'] != 'admin':
+            return render_template('book_hotel.html',user=session['userinfo'],hotellist=listsearch)
+    return render_template('book_hotel.html', user='',hotellist=listsearch,cust='')
+
+@app.route('/hotel-info/<name>',methods=['POST','GET'])
+def hotel_info(name):
+    dbhotel = Hotel.query.filter(Hotel.name == name).first()
+    if 'userinfo' in session:
+        if session['userinfo'] != 'admin':
+            if request.method == 'POST':
+                listsearch =[i for i in Hotel.query.all() if f"{request.form.get('hotel')}".lower() in i.name.lower()]
+                return render_template('book_hotel.html',user=session['userinfo'],hotellist=listsearch)
+            return render_template('hotelinfo.html', user=session['userinfo'], hotel=dbhotel)
+    return render_template('hotelinfo.html', user='',hotel=dbhotel)
+
 @app.route('/booked/<user>')
 def room_booking(user):
     if 'userinfo' in session:

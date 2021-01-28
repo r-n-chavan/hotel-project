@@ -41,12 +41,21 @@ form:before {
     z-index: -1;
     border-radius: 10px;
 }
-
+.min-vh-100 {
+    min-height: 90vh!important;
+}
 
 </style>
 </head>
-<body><section id="cover" class="min-vh-100">
+<body>
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container">
+    <a href="/hotel_booking/"><h2>HotelBooking</h2></a></div>
+</nav>
+
+<section id="cover" class="min-vh-100">
     <div id="cover-caption">
+
         <div class="container">
             <div class="row text-white">
                 <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
@@ -66,7 +75,7 @@ form:before {
                                 <input type="password" class="form-control form-control-lg" placeholder="Entar password" name="pass">
                             </div><br>
                             <button type="submit" class="btn btn-primary btn-lg">Login</button> &nbsp;
-                            <a href="/hotel_booking/"><button type="button" class="btn btn-success btn-lg">Cancel</button></a>
+                            <a href="/registration/"><button type="button" class="btn btn-success btn-lg">Register</button></a>
                         </form>
                       <br><br>
                     </div>

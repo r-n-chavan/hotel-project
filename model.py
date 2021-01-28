@@ -100,6 +100,16 @@ class Login(GenericModel):
     username = db.Column('username', db.String(20), primary_key=True)
     password = db.Column('password', db.String(20))
 
+
+db.create_all()
+login = Login.query.filter(Login.username == "admin", Login.password == "admin123").first()
+if login:
+    pass
+else:
+    log = Login(username="admin", password="admin123")
+    db.session.add(log)
+    db.session.commit()
+
 # if __name__ == '__main__':
 #     cust = Login.query.filter_by(username='ravindra').first()
 #     db.session.delete(cust)

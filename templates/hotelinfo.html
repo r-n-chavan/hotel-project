@@ -92,7 +92,6 @@
 
 
 <section class="py-5 bg-white">
-    {% for hotel in hotellist %}
     <div class="container">
 	<div class="row mb-3">
 	    <div class="col-md-8">
@@ -102,28 +101,37 @@
                 	    <div class="col-md-1 mr-2">
                 	        <i class='fas fa-bed' style='font-size:24px'></i>
                 	    </div>
-
-                	    <div class="col-md-6">
-                            <a href="/hotel-info/{{hotel.name}}"><h4>{{hotel.name}}</h4></a>
+                	    <div class="col-md-10">
+                	        <h4>{{hotel.name}}</h4>
                 	        {{hotel.address}}<br>
-                                {{hotel.contact}}<br> &nbsp;<a href="#" >{{hotel.website}}</a>
-                	    </div>
-                	    <div class="col-md-4">
-                	        <h3>{{hotel.roomref[0].charge}}/-</h3>
-                	        <small>Avg. price/night*</small>
-                	        <div class="sub-row">
-                	          <br><a href="/hotel-info/{{hotel.name}}"> <button type="button" class="btn btn-primary btn-sm btn-block" > Check availability</button></a>
-                	        </div>
+                                {{hotel.contact}}<br> &nbsp;
+                            <a href="#" >{{hotel.website}}</a><br><br><br>
+                            <table class="table" border="1">
+                                <thead >
+                                <th>Room Type</th><th>Room Price</th><th>Select Rooms</th><th>Click Book</th>
+                                </thead>
+                                <tbody>
+                                    {% for room in hotel.roomref %}
+                                    <tr>
+                                        <td>{{room.type}}</td>
+                                        <td>{{room.charge}}/-</td>
+                                        <td><select>{%for i in range(room.qty)%}
+                                            <option>{{i}}</option>
+                                            {%endfor%}</select></td>
+                                        <td><div class="sub-row">
+                                           <a href="/hotel-info/{{hotel.name}}"> <button type="button" class="btn btn-primary btn-sm btn-block" > Reserve</button></a>
+                                        </div></td>
+                                    </tr>
+                                        {% endfor %}
+                                </tbody>
+                            </table>
                 	    </div>
                 	</div>
 	            </div>
 	        </div>
-
-
 	    </div>
 	</div>
     </div>
-    {% endfor %}
 </section>
 
 <footer class="container-fluid text-center bg-lightgray">
